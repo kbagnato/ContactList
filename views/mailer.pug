@@ -1,0 +1,62 @@
+extends layout
+
+block content
+
+	.container
+		.display-3= title
+
+
+		form(action = '/mailer', method = 'POST')#contactForm
+			.row
+				.form-group.col-md-2
+					label(for='prefix') Prefix:
+					select(name='prefix').form-control
+						option(value='Mr.') Mr.
+						option(value='Mrs.') Mrs.
+						option(value='Ms.') Ms.
+						option(value='Dr.') Dr.
+				.form-group.col-md-5
+					label(for = 'firstName') First Name:
+					input(name = 'firstName' placeholder='Johnny' required).form-control
+				.form-group.col-md-5
+					label(for = 'lastName') Last Name:
+					input(name = 'lastName' placeholder='Appleseed' required).form-control
+			.row
+				.form-group.col-md-8
+					label(for = 'street') Street:
+					input(name = 'street' placeholder='123 Apple Way').form-control
+				.form-group.col-md-4
+					label(for = 'city') City:
+					input(name = 'city'  placeholder='Appleville').form-control
+			.row
+				.form-group.col-md-2
+					label(for='state') State:
+					select(name='state').form-control
+						option(value='NJ') NJ
+						option(value='NY') NY
+						option(value='PA') PA
+						option(value='CT') CT
+				.form-group.col-md-4
+					label(for = 'zip') Zip:
+					input(name = 'zip' placeholder='12345').form-control
+				.form-group.col-md-6
+					label(for = 'phone') Phone:
+					input(name = 'phone' placeholder='(123) 456-7890').form-control
+				.form-group.col-md-8
+					label(for = 'email') Email:
+					input(name = 'email' placeholder='johnApples@seed.com').form-control
+			.row
+				.form-group
+					.form-check.custom-control.custom-checkbox
+						input(name='contactMail' type='checkbox')#contactMail.custom-control-input
+						label(for='contactMail').custom-control-label Contact by Mail
+					.form-check.custom-control.custom-checkbox
+						input(name='contactPhone' type='checkbox')#contactPhone.custom-control-input
+						label(for='contactPhone').custom-control-label Contact by Phone
+					.form-check.custom-control.custom-checkbox
+						input(name='contactEmail' type='checkbox')#contactEmail.custom-control-input
+						label(for='contactEmail').custom-control-label Contact by Email
+			button(type = 'submit').btn.btn-primary Create Contact
+
+
+

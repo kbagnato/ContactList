@@ -1,0 +1,48 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.subtitle {
+	text-align: center;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.logout {
+	float: right; 
+}
+
+table, th, td {
+	border: 1px solid black;
+}
+#mapid {
+	min-width: 400px;
+	min-height: 600px;
+	height: 70%;
+	width: 100%;
+}
+#contactForm {
+	/* width: fit-content; */
+	padding: 25px;
+	border-width: 1px;;
+	border-style: solid;
+	border-radius: 15px;
+	max-width: 1000px;
+}
+
+#contactForm div {
+	justify-content: center;
+	text-align: center;
+}
+
+label {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#footer {
+	text-align: center;
+}

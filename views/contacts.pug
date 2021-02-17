@@ -1,0 +1,82 @@
+extends layout
+
+
+block scripts
+	script.
+		//- make pug data available in javascript
+		const people = !{JSON.stringify(people)};
+	
+	script(src='/javascripts/contacts.js')
+
+block content
+	.container
+		.display-3= title
+			//- log out button
+			a.logout(href='/logout' data-toggle='modal' data-target='#logoutModal').btn.btn-outline-danger.btn-sm Log Out
+
+			//- log out popup
+			#logoutModal.modal.fade
+				.modal-dialog
+					.modal-content
+						.modal-header
+							h4.modal-title Are you sure you want to log out?
+							button(data-dismiss='modal').close &times;
+
+						.modal-body
+							button(data-dismiss='modal').btn.btn-danger No
+							a(href='/logout').btn.btn-success Yes
+
+	
+		table.table.table-striped.table-bordered.table-hover
+			tr
+				th Name
+				th Address
+				th Phone
+				th Email
+				th Contact by Phone
+				th Contact by Mail
+				th Contact by Email
+				th Latitude
+				th Longitude
+				th Modify
+
+			each person in people
+				tr
+					td.name= person.prefix + ' ' + person.firstName + ' ' + person.lastName
+					td.address= person.street + ' ' + person.city + ' ' + person.state + ' ' + person.zip
+					td.phone= person.phone
+					td.email= person.email
+					td.contactPhone= (person.contactPhone) ? 'Yes' : 'No'
+					td.contactMail= (person.contactMail) ? 'Yes' : 'No'
+					td.contactEmail= (person.contactEmail) ? 'Yes' : 'No'
+					td.latitude= person.latitude
+					td.longitude= person.longitude
+					td.idBtn.btn-group-vertical
+						form(action = "/update", method = "get")
+							input(id ='id', name='id', value=person._id, type='hidden')
+							button(type = "submit").btn.btn-success.btn-sm Update
+						
+						form(action = "/delete", method = "post")
+							input(id ='id', name='id', value=person._id, type='hidden')
+							button(type = "submit").btn.btn-danger.btn-sm Delete
+						
+						//- todo add delete confirmation popup 
+						//- this code will repeatedly use the first index in person
+						//- //- delete button
+						//- btn.delete(onclick='delete()' data-toggle='modal' data-target='#deleteModal').btn.btn-danger.btn-sm Delete
+
+						//- //- delete popup
+						//- #deleteModal.modal.fade
+						//- 	.modal-dialog
+						//- 		.modal-content
+						//- 			.modal-header
+						//- 				h4.modal-title #{person.firstName} will be deleted forever. Continue?
+						//- 				button(data-dismiss='modal').close &times;
+
+						//- 			.modal-body
+						//- 				button(data-dismiss='modal').btn.btn-danger No
+						//- 				btn(href='/logout').btn.btn-success Yes
+
+		br
+		.display-3 Contacts Map
+		#mapid
