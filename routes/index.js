@@ -14,6 +14,10 @@ var ensureLoggedIn = function(req, res, next) {
 
 // -------------------- MAILER --------------------
 /* GET mailer - send personal info submission form. */
+router.get("/", function(req, res, next) {
+	res.render("mailer", {title: "Create Contact"});
+});
+
 router.get("/mailer", function(req, res, next) {
 	res.render("mailer", {title: "Create Contact"});
 });
