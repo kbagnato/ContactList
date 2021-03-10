@@ -34,7 +34,7 @@ app.use(bodyParser.json());
 
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://kevinb:h-RFm7PEvnK_8in@contacts-cluster.0zhzv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const uri = "mongodb+srv://kevinb:h-RFm7PEvnK_8in@contacts-cluster.0zhzv.mongodb.net/contactsDb?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
   const collection = client.db("contactsDb").collection("people");
