@@ -6,7 +6,7 @@ var accessToken;
 $("document").ready(function() {
 	// create map centered over Ramapo College
 	mymap = L.map("mapid").setView([41.081,-74.176], 13);
-	accessToken = "pk.eyJ1Ijoia2JhZ25hdG8iLCJhIjoiY2syYXJyaHd2MjNheDNocGVvc2xidG1rdiJ9.suIrF81qo7TYO8M7SggcYg";
+	accessToken = "pk.eyJ1IjoiYmFnYWRvbnV0cyIsImEiOiJja2tzbnVyMDMwbnIyMnhxbWVxdnRoc3Z1In0.IXWNtJpEBnXTXDyKVVRC5w";
 	
 	// add mapbox tile with personal token
 	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {

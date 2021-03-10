@@ -55,7 +55,7 @@ router.post("/mailer", function(req, res, next) {
 				"longitude" : longitude
 			}
 
-			
+
 			req.people.insertOne(person, function(err, newDoc) {
 				if (err) {
 					throw err;
@@ -108,11 +108,10 @@ router.get("/update", function(req, res, next) {
 /* POST update - update the person in DB */
 router.post('/update', function(req, res, next) {
 	// geocode using opencage
-	// geocode using opencage
 
 	var options = {
 		provider: "opencage",
-		apiKey: '856797c7561a4ea6b27ba4d7790366b7',
+		apiKey: '1dc9d934f6e94cce9ba8cbce314dd390',
 	};
 	let address = req.body.street + " " + req.body.city + " " + req.body.state + " " + req.body.zip;
 	let latitude, longitude;
