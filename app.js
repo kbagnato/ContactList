@@ -29,41 +29,28 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-
-
-
+// database
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://kevinb:" + process.env.DB_PWD + "@contacts-cluster.0zhzv.mongodb.net/contactsDb?retryWrites=true&w=majority";
 // const uri = process.env.MONGODB_URI;
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+var collection;
 client.connect(err => {
-  const collection = client.db("contactsDb").collection("people");
-  // perform actions on the collection object
-  client.close();
+	collection = client.db("contactsDb").collection("people");
+	// perform actions on the collection object
 });
 
-
-// // setup mongoDB connection
-// var people;
-// var url = "mongodb://localhost:27017/test";
-// MongoClient.connect(url, function(err, db) {
-// 	if (err) throw err;
-
-// 	// mongoDB is test.people
-// 	var dbo = db.db("test");
-// 	people = dbo.collection("people");
-// });
-
-// // attach db people to each request 
-// app.use(function(req, res, next) {
-// 	req.people = people;
-// 	next();
-// });
+// attach people collection to each request 
+app.use(function(req, res, next) {
+	req.people = collection;
+	next();
+});
+client.close();
 
 // setup singleton username/password on server
-var username = "cmps369";
-var password = "finalproject";
+var username = "admin";
+var password = "password";
 bcrypt.genSalt(10, function (err, salt) {
 	bcrypt.hash(password, salt, function (err, hash) {
 		password = hash;
