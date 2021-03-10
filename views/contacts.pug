@@ -8,6 +8,10 @@ block scripts
 	
 	script(src='/javascripts/contacts.js')
 
+	//- mapbox
+	script(src='https://api.mapbox.com/mapbox-gl-js/v2.1.0/mapbox-gl.js')
+	link(href='https://api.mapbox.com/mapbox-gl-js/v2.1.0/mapbox-gl.css' rel='stylesheet')
+
 block content
 	.container
 		.display-3= title
@@ -79,4 +83,4 @@ block content
 
 		br
 		.display-3 Contacts Map
-		#mapid
+		#map

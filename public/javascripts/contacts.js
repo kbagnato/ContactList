@@ -1,46 +1,50 @@
 // map variables
-var mymap;
-var accessToken;
+var map;
 
 // onload render map and pin/label contacts
-$("document").ready(function() {
-	// create map centered over Ramapo College
-	mymap = L.map("mapid").setView([41.081,-74.176], 13);
-	accessToken = "pk.eyJ1IjoiYmFnYWRvbnV0cyIsImEiOiJja2tzbnVyMDMwbnIyMnhxbWVxdnRoc3Z1In0.IXWNtJpEBnXTXDyKVVRC5w";
-	
-	// add mapbox tile with personal token
-	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-		maxZoom: 18,
-		id: 'mapbox.streets',
-		accessToken: accessToken
-	}).addTo(mymap);
+$("document").ready(function () {
+	// init mapbox on page
+	mapboxgl.accessToken = 'pk.eyJ1IjoiYmFnYWRvbnV0cyIsImEiOiJja2tzbnVyMDMwbnIyMnhxbWVxdnRoc3Z1In0.IXWNtJpEBnXTXDyKVVRC5w';
 
+	// define map on page
+	map = new mapboxgl.Map({
+		container: 'map',
+		// style: 'mapbox://styles/mapbox/outdoors-v11', // stylesheet location
+		style: 'mapbox://styles/mapbox/streets-v11',
+		// center: [-83.75, 35.58],
+		// zoom: 12.5,
+		// pitch: 61,
+		// bearing: 118
+	});
+
+	// add map features when loaded
+	addContacts();
+});
+
+function addContacts() {
 	// pin contacts to map 
-	pinContacts();
-	
-	// pin contacts to the map with their info as a tooltip
-	function pinContacts() {
-		people.forEach(function(person) {
-			let tooltip = "" + person['firstName'] + ' ' + person['lastName'] + '\n' + person['street'] + '\n' + person['city'] + ' ' + person['state'] + ' ' + person['zip'] + ' ' + person['phone'] + ' ' + person['email'];
-			addPin(person['latitude'], person['longitude'], tooltip);
-			centerMap(person['latitude'], person['longitude']);
-		});
-	}
+	people.forEach(function (person) {
+		console.log(person);
+		let tooltip = "" + person['firstName'] + ' ' + person['lastName'] + '\n' + person['street'] + '\n' + person['city'] + ' ' + person['state'] + ' ' + person['zip'] + ' ' + person['phone'] + ' ' + person['email'];
+		addPin(person['longitude'], person['latitude'], tooltip);
+		centerMap(person['longitude'], person['latitude']);
+	});
+
 	
 	// add pin to map at [lat, long] with a tooltip
 	function addPin(long, lat, tooltip) {
-		L.marker([long, lat]).bindTooltip(tooltip).addTo(mymap);
+		// L.marker([long, lat]).bindTooltip(tooltip).addTo(map);
+		var marker = new mapboxgl.Marker().setLngLat([long, lat]).addTo(map);
 	}
 	
-	// center map on [lat, long]
-	function centerMap(lat, long) {
-		mymap.panTo(new L.LatLng(lat, long));
+	// center map on [long, lat]
+	function centerMap(long, lat) {
+		map.panTo(new L.LatLng(long, lat));
 	}
-	
-	// redirect user to mailer
-	// todo might remove this for a nav bar
-	function createContact() {
-		window.location.href = "/mailer";
-	}
-});
+}
+
+// redirect user to mailer
+// todo might remove this for a nav bar
+function createContact() {
+	window.location.href = "/mailer";
+}
