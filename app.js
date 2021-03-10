@@ -1,3 +1,4 @@
+require('dotenv').config()
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -30,11 +31,11 @@ app.use(bodyParser.json());
 
 
 
-// const uri = process.env.MONGODB_URI;
-
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://kevinb:h-RFm7PEvnK_8in@contacts-cluster.0zhzv.mongodb.net/contactsDb?retryWrites=true&w=majority";
+const uri = "mongodb+srv://kevinb:" + process.env.DB_PWD + "@contacts-cluster.0zhzv.mongodb.net/contactsDb?retryWrites=true&w=majority";
+// const uri = process.env.MONGODB_URI;
+
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
   const collection = client.db("contactsDb").collection("people");
