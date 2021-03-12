@@ -2,7 +2,7 @@ $(document).ready(function() {
 	// set current navbar tab to 'active'
 	let href = window.location.pathname;
 	let links = $('.nav-link');
-	if (href.search('mailer') > 0) {
+	if (href.search('mailer') > 0 || href.search('') > 0) {
 		links[0].classList.add('active');
 	}
 	else {
