@@ -38,15 +38,13 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 var collection;
 client.connect(err => {
 	collection = client.db("contactsDb").collection("people");
-	// perform actions on the collection object
 });
-
 // attach people collection to each request 
 app.use(function(req, res, next) {
 	req.people = collection;
 	next();
 });
-client.close();
+// client.close();
 
 // setup singleton username/password on server
 var username = "admin";
