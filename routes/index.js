@@ -75,10 +75,11 @@ router.post("/mailer", function(req, res, next) {
 /* GET contacts - display all contacts in database */
 router.get("/contacts", ensureLoggedIn, function(req, res, next) {
 	req.people.find({}).toArray(function(err, result) {
-		if (err) {
-			throw err;
-		}
-		res.render("contacts", {title: "Contacts", people: result});
+		res.render("contacts", {title: "Contacts", people: req.people});
+		// if (err) {
+		// 	throw err;
+		// }
+		// res.render("contacts", {title: "Contacts", people: result});
 	});
 });
 // --------------------------------------------------
